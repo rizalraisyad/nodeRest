@@ -2,6 +2,7 @@ const fs = require("fs");
 const http = require("http");
 // const { type } = require("node:os");
 const url = require("url");
+const replaceTemplate = require("./starter/module/replaceTemplate");
 // const { start } = require("node:repl");
 // // blocking
 // const textin = fs.readFileSync("./starter/txt/input.txt", "utf-8");
@@ -46,6 +47,18 @@ const url = require("url");
 //     // res.end(data);
 //   },
 // );
+const tempOverview = fs.readFileSync(
+  `${__dirname}/starter/templates/template-overview.html`,
+  "utf-8",
+);
+const tempCard = fs.readFileSync(
+  `${__dirname}/starter/templates/template-card.html`,
+  "utf-8",
+);
+const tempProduct = fs.readFileSync(
+  `${__dirname}/starter/templates/template-product.html`,
+  "utf-8",
+);
 
 const data = fs.readFileSync(
   `${__dirname}/starter/dev-data/data.json`,
@@ -56,13 +69,34 @@ const dataObj = JSON.parse(data);
 const server = http.createServer((req, res) => {
   // console.log(req);
   // console.log(req.url);
-  const pathname = req.url;
-  if (pathname === "/overview") {
+  // console.log(req.url);
+  const { query, pathname } = url.parse(req.url, true);
+  // console.log(url.parse(req.url, true));
+  // const pathname = req.url;
+  // Overview page
+  if (pathname === "/overview" || pathname === "/") {
     // console.log(__dirname);
     // console.log(__filename);
-    res.end("this is the overview");
+    res.writeHead(200, {
+      "Content-type": "text/html",
+    });
+    const cardsHTML = dataObj
+      .map((el) => replaceTemplate(tempCard, el))
+      .join("");
+    // console.log(cardsHTML);
+    const output = tempOverview.replace("{%PRODUCT_CARDS%}", cardsHTML);
+    res.end(output);
+    // res.end("this is the overview");
+
+    //product
   } else if (pathname === "/product") {
-    res.end("this is the product");
+    // console.log(query);
+    const product = dataObj[query.id];
+    const output = replaceTemplate(tempProduct, product);
+    // console.log(product);
+    res.end(output);
+
+    //api
   } else if (pathname === "/api") {
     res.writeHead(200, {
       "Content-type": "application/json",
