@@ -1,0 +1,23 @@
+{
+  "name": "node-farm",
+  "version": "1.0.0",
+  "description": "Learning node.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rizalraisyad/nodeRest.git"
+  },
+  "author": "Rizal Muharam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rizalraisyad/nodeRest/issues"
+  },
+  "homepage": "https://github.com/rizalraisyad/nodeRest#readme",
+  "dependencies": {
+    "nodemon": "^2.0.7",
+    "slugify": "^1.5.0"
+  }
+}
