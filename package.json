@@ -18,6 +18,7 @@
   "homepage": "https://github.com/rizalraisyad/nodeRest#readme",
   "dependencies": {
     "nodemon": "^2.0.7",
-    "slugify": "^1.5.0"
+    "slugify": "^1.5.0",
+    "superagent": "^6.1.0"
   }
 }

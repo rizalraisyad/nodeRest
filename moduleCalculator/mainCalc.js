@@ -12,6 +12,6 @@ console.log(calculator2.add(2, 5));
 const { add, multiply, divide } = require('./calc2');
 console.log(add(2, 5));
 
-require('./calc3')();
-require('./calc3')();
-require('./calc3')();
+require('./module3')();
+require('./module3')();
+require('./module3')();
