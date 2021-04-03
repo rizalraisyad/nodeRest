@@ -5,11 +5,14 @@ fs.readFile(`${__dirname}/dog.txt`, (err, data) => {
 
   superagent
     .get(`https://dog.ceo/api/breed/${data}/images/random`)
-    .end((err, res) => {
+    .then((res) => {
       console.log(res.body.message);
-      if (err) return console.log(err.message);
       fs.writeFile('img.txt', res.body.message, (err) => {
         console.log('saved');
       });
+    })
+    .catch((err) => {
+      console.log('err');
+      console.log(err.message);
     });
 });
