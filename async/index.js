@@ -39,17 +39,28 @@ const getDogPic = async () => {
   return 'READYYYY';
 };
 
-console.log('1: will get dog pics');
-let a;
-getDogPic()
-  .then((x) => {
-    console.log(x);
+(async () => {
+  try {
+    console.log('1: will get dog pics');
+    const data = await getDogPic();
+    console.log(data);
     console.log('2: Done gettig dog pics');
-    a = x;
-  })
-  .catch((err) => {
+  } catch (err) {
     console.log(err);
-  });
+  }
+})();
+
+// console.log('1: will get dog pics');
+// let a;
+// getDogPic()
+//   .then((x) => {
+//     console.log(x);
+//     console.log('2: Done gettig dog pics');
+//     a = x;
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 // readFilePro(`${__dirname}/dog.txt`)
 //   .then((data) => {
